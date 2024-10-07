@@ -1,0 +1,27 @@
+#include <stdlib.h>
+
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    
+    int* indices = (int*)malloc(2 * sizeof(int));
+    *returnSize = 2; 
+
+    
+    int hash[20001] = {0}; 
+
+    for (int i = 0; i < numsSize; i++) {
+        int complement = target - nums[i];
+        
+        
+        if (complement >= -10000 && complement <= 10000 && hash[complement + 10000] != 0) {
+            indices[0] = hash[complement + 10000] - 1; // Get the stored index
+            indices[1] = i; 
+            return indices; 
+        }
+        
+        
+        hash[nums[i] + 10000] = i + 1; 
+    }
+
+    free(indices); 
+    return NULL; 
+}
